@@ -24,8 +24,8 @@ def solution(iterable):
     
   for i in range(n):
     # Depth-first search from each element as the root, removing duplicates
-    # by ensuring each subsequent element at next level of tree is distinct 
-    # from its parent
+    # by ensuring each subsequent element to be added is distinct at each
+    # level of the tree
     if iterable[i] not in handled:
       handled.add(iterable[i])
       visited = set([i])
