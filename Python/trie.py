@@ -33,10 +33,9 @@ class TrieNode:
         def dfs(node: 'TrieNode', path: List[str]) -> None:
             if node.isWord():
                 res.append(''.join(path))
-            else:
-                for c, n in node.iterLinks():
-                    path.append(c)
-                    dfs(n, path)
+            for c, n in node.iterLinks():
+                path.append(c)
+                dfs(n, path)
             path.pop()
             
         for c, n in self.__links.items():
@@ -53,7 +52,7 @@ class Trie:
 
     def insert(self, word: str) -> None:
         currNode = self.__root
-        for c in list(word):
+        for c in word:
             key = currNode.getKey(c)
             if key:
                 currNode = key
@@ -66,7 +65,7 @@ class Trie:
         Returns true if the string word is in the trie
         """
         currNode = self.__root
-        for c in list(word):
+        for c in word:
             key = currNode.getKey(c)
             if key:
                 currNode = key
@@ -82,7 +81,7 @@ class Trie:
         Returns true if there is a previously inserted string word that has the given prefix
         """
         currNode = self.__root
-        for c in list(prefix):
+        for c in prefix:
             key = currNode.getKey(c)
             if key:
                 currNode = key
@@ -95,13 +94,13 @@ class Trie:
         Returns a list of all words in the trie with the given prefix 
         """
         currNode = self.__root
-        for c in list(prefix):
+        for c in prefix:
             key = currNode.getKey(c)
             if key:
                 currNode = key
             else:
                 return []
-            
+        
         return [prefix + x for x in currNode.getAllWords()]
         
 
@@ -117,5 +116,6 @@ if __name__ == "__main__":
     assert main(["dog", "deer", "deal"], "de") == ["deer", "deal"]
     assert main(["cat", "car", "caa"], "ca") == ["cat", "car", "caa"]
     assert main(["cat", "car", "cer"], "yy") == []
+    assert main(["car", "try", "cat", "tries", "catty", "done", "card", "carry"], "ca") == ["car", "card", "carry", "cat", "catty"]
     
     
